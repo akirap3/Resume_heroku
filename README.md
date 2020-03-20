@@ -176,3 +176,47 @@ git push -f heroku master
 ### 驗證
 ![](https://miro.medium.com/max/677/1*Kfo9kDe66n3roanyr06wqQ.png)
 ![](https://miro.medium.com/max/679/1*bQWxeHOO7KnROUMiHYnZBw.png)
+
+### Trouble Shooting
+#### 問題 1 : 使用heroku login指令，會一直卡在如下畫面
+![](https://miro.medium.com/max/754/0*1lp_WqcltBjx7lUF.png)
+- 解決 : 使用舊的login機制
+```
+heroku login -i
+```
+- [參考](https://github.com/heroku/cli/issues/1145)
+#### 問題 2 : heroku指令找不到
+- 解決 : [參考](https://stackoverflow.com/questions/12795498/heroku-command-not-found)
+![](https://miro.medium.com/max/1000/0*5IQCfeXeMH9fd1G9.png)
+#### 問題3 : 如果沒有Procfile，heroku無法判定你是使用哪一種程式語言
+- 解決 : 建立Procfile，內容如下
+```
+web: python app.py
+```
+- 及使用指令
+```
+heroku buildpacks:set heroku/python
+```
+- 參考 : [1](https://stackoverflow.com/questions/46109465/app-not-compatible-with-buildpack-heroku?rq=1) [2](https://devcenter.heroku.com/articles/buildpacks)
+#### 問題4 :
+- FanPeter_resume資料夾中，如果有其他資料夾，例如我原本的app.py及secret_key是放在FanPeter_resume/FanPeter_Line/資料夾中，git到Heroku時，build會成功，但是python會找不到要執行的app.py檔
+- 解決 :
+ - 由於git檔案到heroku，都是將檔案放在/app資料夾中，python抓檔案時，路徑是在/app中的app.py，如果有好幾層的資料夾，必須要在Procfile中寫app.py的絕對路徑。
+ - 為避免麻煩，我將所有要執行的資料放在同一層，特別是要執行的app.py、images/、secret_key
+ - 可以到此app裡面看它的資料結構
+- 兩種方式登入
+ - 到你的heroku的app
+ ![](https://miro.medium.com/max/312/0*Lg8stOZpF7skHYpv.png)
+ ![](https://miro.medium.com/max/684/0*ExeCDYkbjS0hLO_s.png)
+ ![](https://miro.medium.com/max/1000/0*NbQivSJlsT-wWRWN.png)
+ - 使用heroku cli
+ ```
+ heroku run 再接linux的指令
+ ```
+ ![](https://miro.medium.com/max/1000/0*s6r5cBGjkoENa8u8.png)
+ - [參考](https://stackoverflow.com/questions/10200732/django-deploy-using-heroku-errno-2-no-such-file-or-directory)
+ 
+ ### 練習及測試
+ - 參考 [linebot-echo](https://github.com/MarsW/linebot-echo) [line-bot-tutorial](https://github.com/yaoandy107/line-bot-tutorial)
+ 
+ 
