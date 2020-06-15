@@ -159,6 +159,7 @@ cd FanPeter_resume/
 heroku login -i
 ```
 - 輸入email及密碼
+
 ![](https://miro.medium.com/max/525/0*3OJG7h1SyXSZ2dKP.png)
 
 - 初始化 git
